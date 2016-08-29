@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/layout/activity_sobre.xml",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/layout/activity_sobre.xml"
+    },
+    {
         "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
         "source": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_big_media.xml"
     },
@@ -112,6 +116,10 @@
         "source": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_media_action.xml"
     },
     {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/layout/dialog_obreiro_completo.xml",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/layout/dialog_obreiro_completo.xml"
+    },
+    {
         "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
         "source": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_activity_chooser_view.xml"
     },
@@ -178,6 +186,10 @@
     {
         "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
         "source": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/layout/activity_settings.xml",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/layout/activity_settings.xml"
     },
     {
         "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/layout/dialog_obreiro.xml",

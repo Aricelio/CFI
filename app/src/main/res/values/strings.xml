@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Controle de Frequências de Igrejas</string>
     <string name="action_settings">Configurações</string>
+    <string name="about">Sobre</string>
 
     <!-- Conteudo CardView-->
     <string name="membros">Membros:</string>
@@ -12,9 +13,27 @@
     <string name="direcao">Direção:</string>
     <string name="ebd">EBD:</string>
 
+    <!-- Conteudo para Whatsapp-->
+    <string name="membros_w">*Membros:*</string>
+    <string name="visitantes_frequentes_w">*Visitantes Frequentes:*</string>
+    <string name="visitantes_nao_frequentes_w">*Visitantes Não Frequentes:*</string>
+    <string name="culto_w">*Culto:*</string>
+    <string name="palavra_w">*Palavra:*</string>
+    <string name="louvor_w">*Louvor:*</string>
+    <string name="direcao_w">*Direção:*</string>
+
     <!-- Item Card Main-->
     <string name="item_card_edit">Editar</string>
     <string name="item_card_delete">Apagar</string>
     <string name="item_card_share">Compartilhar</string>
+    <string name="title_activity_settings">Configurações</string>
+
+    <!-- Activity Configurações -->
+    <string name="checkbox_modo">Modo Avançado</string>
+    <string name="checkbox_modo_summary">Modo que mostra opções avançadas</string>
+    <string name="geral">Geral</string>
+    <string name="sobre_conteudo">Aplicativo para controle de frequência das Igrejas, foi construido de auxiliar os irmãos na contagem da frequência dos membros e visitantes da igreja nos cultos</string>
+    <string name="sobre_desenvolvedor">Desenvolvido por: Aricélio de Souza Fernandes</string>
+
 
 </resources>

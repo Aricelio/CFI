@@ -19,6 +19,9 @@ public class DBUtil extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE = "dbCFI";
 
+    // Preferences
+    public static final String PREFERENCES = "Preferences";
+
     // Tabela Frequencia
     public static final String T_FREQUENCIA = "FREQUENCIA";
     public static final String F_ID = "id";

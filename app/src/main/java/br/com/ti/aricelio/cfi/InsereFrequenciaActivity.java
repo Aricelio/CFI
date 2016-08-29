@@ -1,6 +1,8 @@
 package br.com.ti.aricelio.cfi;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import br.com.ti.aricelio.cfi.DataAccess.FrequenciaDAO;
@@ -21,9 +24,10 @@ import br.com.ti.aricelio.cfi.Model.Frequencia;
 public class InsereFrequenciaActivity extends AppCompatActivity {
 
     // Variaveis
-    private String obL = "", obP = "";
+    private String obL = "", obP = "", tmpData = "";
     boolean closeActivity = false;
     boolean checkEBD = false;
+    boolean isAdvancedMode = false;
 
     // Método OnCreate..............................................................................
     @Override
@@ -48,11 +52,14 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
             chbEBD.setVisibility(CheckBox.INVISIBLE);
         }
 
+        // Preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean modo = sharedPref.getBoolean("modo",false);
+        isAdvancedMode = modo;
     }
 
     // Método Salvar...............................................................................
     public void onClickSalvar(View v){
-        // Chama a Dialog
         createDialogDirecao();
     }
 
@@ -144,7 +151,7 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        // Se pressionar a Seta para voltar na ToolBar, finaliza a Activity
+        // Se pressionar a Seta para voltar na ToolBar chama a Dialog
         if (id == android.R.id.home) {
 
             // Cria a caixa de alertFecharActivity
@@ -158,7 +165,6 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     // Método onBackPressed.........................................................................
@@ -174,11 +180,12 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
     private void createDialogDirecao(){
 
         // Verifica o ChechBox
-        CheckBox chbEBD = (CheckBox) findViewById(R.id.chbEBD);
         Calendar cal = Calendar.getInstance();
         int diaSemana = cal.get(Calendar.DAY_OF_WEEK);
 
+        // Se for Domingo verifica se o CheckBox foi selecionado
         if(diaSemana == Calendar.SUNDAY){
+            CheckBox chbEBD = (CheckBox) findViewById(R.id.chbEBD);
             if(chbEBD.isChecked()){
                 checkEBD = true;
             }
@@ -188,12 +195,22 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
         AlertDialog alertDirecao;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.dialog_obreiro, null);
-        builder.setView(dialogView);
+        final View dialogView;
 
+        // Cria uma alert diferente dependendo do Modo
+        if(isAdvancedMode){
+            dialogView = inflater.inflate(R.layout.dialog_obreiro_completo, null);
+        }
+        else{
+            dialogView = inflater.inflate(R.layout.dialog_obreiro, null);
+        }
+
+        builder.setView(dialogView);
         final EditText edtOL = (EditText) dialogView.findViewById(R.id.edtObLouvor);
         final EditText edtOP = (EditText) dialogView.findViewById(R.id.edtObPalavra);
+        final EditText edtData = (EditText) dialogView.findViewById(R.id.edtData);
 
+        // Se o CheckBox EBD foi selecionado
         if(checkEBD){
             edtOP.setVisibility(EditText.INVISIBLE);
             edtOL.setHint("Direção");
@@ -203,14 +220,25 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
+                // Senão for EBD
                 if(!checkEBD){
                     obL = edtOL.getText().toString();
                     obP = edtOP.getText().toString();
+
+                    // Se estiver no modo avançado pega a Data inserida
+                    if(isAdvancedMode){
+                        tmpData = edtData.getText().toString();
+                    }
                 }
+                // Se for EBD pega só o EDT da direção do culto
                 else{
                     obL = edtOL.getText().toString();
+                    if(isAdvancedMode){
+                        tmpData = edtData.getText().toString();
+                    }
                 }
 
+                // Chama o método para Salvar
                 save();
             }
         });
@@ -257,6 +285,7 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
         try {
             Frequencia f = new Frequencia();
             FrequenciaDAO fDAO = new FrequenciaDAO(this);
+            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
 
             TextView tvQtdeMembros = (TextView) findViewById(R.id.tvQtdeMembros);
             TextView tvQtdeVFrequentes = (TextView) findViewById(R.id.tvQtdeVFrequentes);
@@ -267,10 +296,14 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
             int qtdeVFreq = Integer.parseInt(tvQtdeVFrequentes.getText().toString());
             int qtdeVNFreq = Integer.parseInt(tvQtdeVNFrequentes.getText().toString());
 
-            if (chbEBD != null) {
-                if (chbEBD.isChecked()) {
-                    f.setTipoCulto(EnumTipoCulto.EBD);
-                }
+            // Se o CheckBox do EBD foi selecionado
+            if (chbEBD.isChecked()) {
+                f.setTipoCulto(EnumTipoCulto.EBD);
+            }
+
+            // Se foi digitado algo no campo Data
+            if(!tmpData.equals("")){
+                f.setDataculto(dt.parse(tmpData));
             }
 
             f.setQtdeMembros(qtdeMembros);

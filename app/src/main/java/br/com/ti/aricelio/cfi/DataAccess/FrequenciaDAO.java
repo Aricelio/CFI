@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.ti.aricelio.cfi.Interface.FrequenciaRepository;
@@ -44,7 +45,7 @@ public class FrequenciaDAO implements FrequenciaRepository {
             values.put(DBUtil.F_QTDE_MEMBROS, f.getQtdeMembros());
             values.put(DBUtil.F_QTDE_VFREQUENTES, f.getQtdeVFreq());
             values.put(DBUtil.F_QTDE_VNFREQUENTES, f.getQtdeVNFreq());
-            values.put(DBUtil.F_DATA, f.getDataculto().toString());
+            values.put(DBUtil.F_DATA, f.getStringCompletaDataculto());
             values.put(DBUtil.F_TCULTO, f.getTipoCulto().toString());
             values.put(DBUtil.F_OBLOUVOR, f.getOb_louvor());
             values.put(DBUtil.F_OBPALAVRA, f.getOb_palavra());
@@ -134,12 +135,13 @@ public class FrequenciaDAO implements FrequenciaRepository {
     }
 
     // Método Buscar com parametros.................................................................
-    public List<Frequencia> find(int rows, boolean isOrderByDesc, String fieldOrderBy) throws Exception {
+    public List<Frequencia> find(int rows, boolean isOrderByDesc, String fieldOrderBy, String typeFieldOrderBy) throws Exception {
 
         List<Frequencia> list  = new ArrayList<>();
-        SimpleDateFormat dt = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        //SimpleDateFormat dt2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
 
-        String sql = BuildSQL.select(DBUtil.T_FREQUENCIA,rows,isOrderByDesc,fieldOrderBy);
+        String sql = BuildSQL.select(DBUtil.T_FREQUENCIA,rows,isOrderByDesc,fieldOrderBy, typeFieldOrderBy);
 
         DBUtil dbUtil = new DBUtil(mContext);
         Cursor cursor = dbUtil.getReadableDatabase().rawQuery(sql, null);
@@ -152,10 +154,15 @@ public class FrequenciaDAO implements FrequenciaRepository {
                 f.setQtdeMembros(cursor.getInt(1));
                 f.setQtdeVFreq(cursor.getInt(2));
                 f.setQtdeVNFreq(cursor.getInt(3));
-                f.setDataculto( dt.parse( cursor.getString(4)));
+
                 f.setOb_louvor( cursor.getString(6));
                 f.setOb_palavra( cursor.getString(7));
 
+                // Data
+                f.setDataculto( dt.parse( cursor.getString(4)));
+
+
+                // Tipo Culto
                 if(cursor.getString(5).equals(EnumTipoCulto.NORMAL.toString()))
                     f.setTipoCulto(EnumTipoCulto.NORMAL);
                 else if(cursor.getString(5).equals(EnumTipoCulto.SENHORAS.toString()))

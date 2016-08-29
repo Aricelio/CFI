@@ -20,7 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InsereFrequenciaActivity"></activity>
+        <activity android:name=".InsereFrequenciaActivity" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/action_settings">
+        </activity>
+        <activity
+            android:name=".Model.SobreActivity"
+            android:label="@string/about">
+        </activity>
     </application>
 
 </manifest>

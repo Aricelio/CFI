@@ -160,7 +160,7 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
                     Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                     sharingIntent.setType("text/plain");
                     sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "\n\n");
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getShareContent(position));
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getShareContent(position, false));
                     mContext.startActivity(Intent.createChooser(sharingIntent, "Compartilhar"));
 
                     return true;
@@ -201,28 +201,40 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
     }
 
     // Método que retorna uma String com os dados a serem compartilhados............................
-    private String getShareContent(int position){
+    private String getShareContent(int position, boolean isForWhatsapp){
 
         Frequencia f = mList.get(position);
         String strContent;
 
-        if(mList.get(position).getTipoCulto().equals(EnumTipoCulto.EBD)){
-            strContent =
-                mContext.getString(R.string.ebd) + " " + f.getStringDataculto() + "\n"
-                + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n"
-                + mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
-                + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n"
-                + mContext.getString(R.string.direcao) + " " + f.getOb_louvor();
+        if(!isForWhatsapp){
+            if(mList.get(position).getTipoCulto().equals(EnumTipoCulto.EBD)){
+                strContent =
+                    mContext.getString(R.string.ebd) + " " + f.getStringDataculto() + "\n"
+                    + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n"
+                    + mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
+                    + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n"
+                    + mContext.getString(R.string.direcao) + " " + f.getOb_louvor();
+            }
+            else{
+                strContent =
+                    mContext.getString(R.string.culto) + " " + f.getStringDataculto() + "\n"
+                    + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n"
+                    + mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
+                    + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n"
+                    + mContext.getString(R.string.louvor) + " " + f.getOb_louvor() + "\n"
+                    + mContext.getString(R.string.palavra) + " " + f.getOb_palavra();
+            }
         }
         else{
             strContent =
-                mContext.getString(R.string.culto) + " " + f.getStringDataculto() + "\n"
-                + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n"
-                + mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
-                + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n"
-                + mContext.getString(R.string.louvor) + " " + f.getOb_louvor() + "\n"
-                + mContext.getString(R.string.palavra) + " " + f.getOb_palavra();
+                mContext.getString(R.string.culto_w) + " " + f.getStringDataculto() + "\n"
+                + mContext.getString(R.string.membros_w) + " " + f.getQtdeMembros() + "\n"
+                + mContext.getString(R.string.visitantes_frequentes_w) + " " + f.getQtdeVFreq() + "\n"
+                + mContext.getString(R.string.visitantes_nao_frequentes_w) + " " + f.getQtdeVNFreq() + "\n"
+                + mContext.getString(R.string.louvor_w) + " " + f.getOb_louvor() + "\n"
+                + mContext.getString(R.string.palavra_w) + " " + f.getOb_palavra();
         }
+
 
         return strContent;
     }
@@ -234,7 +246,7 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
 
             Intent waIntent = new Intent(Intent.ACTION_SEND);
             waIntent.setType("text/plain");
-            String text = getShareContent(position);
+            String text = getShareContent(position, true);
 
             PackageInfo info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
             //Check if package exists or not. If not then code

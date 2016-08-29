@@ -1,7 +1,9 @@
 package br.com.ti.aricelio.cfi;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import br.com.ti.aricelio.cfi.Adapter.FrequenciaAdapter;
 import br.com.ti.aricelio.cfi.DataAccess.DBUtil;
 import br.com.ti.aricelio.cfi.DataAccess.FrequenciaDAO;
 import br.com.ti.aricelio.cfi.Model.Frequencia;
+import br.com.ti.aricelio.cfi.Model.SobreActivity;
 import br.com.ti.aricelio.libutils.Interfaces.RecyclerViewOnClickListener;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewOnClickListener {
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     private RecyclerView mRecyclerView;
     private List<Frequencia> mList;
     private FrequenciaAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +63,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
+
+        // SharedPreferences
+        SharedPreferences.Editor editor = getSharedPreferences(DBUtil.PREFERENCES, MODE_PRIVATE).edit();
+        editor.putBoolean("modo", false);
+        editor.apply();
     }
 
     // Métood que carrega a RecyclerView............................................................
     private void loadRecyclerView() throws  Exception{
         try{
             FrequenciaDAO dao = new FrequenciaDAO(this);
-            mList = dao.find(7,false, DBUtil.F_DATA);
+            mList = dao.find(7,true, DBUtil.F_DATA, "Data");
 
             mAdapter = new FrequenciaAdapter(this, mList);
             mAdapter.setRecyclerViewOnClickListener(this);
@@ -91,7 +100,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent i = new Intent(this, SettingActivity.class);
+            startActivity(i);
+        }
+        else if(id == R.id.about){
+            Intent i = new Intent(this, SobreActivity.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
@@ -104,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         try{
             loadRecyclerView();
             mAdapter.notifyDataSetChanged();
+
         } catch(Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }

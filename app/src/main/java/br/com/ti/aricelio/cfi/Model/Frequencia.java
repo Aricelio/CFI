@@ -81,6 +81,11 @@ public class Frequencia {
         return dataculto;
     }
 
+    public String getStringCompletaDataculto() {
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return dt.format(this.dataculto);
+    }
+
     public String getStringDataculto() {
         SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
         return dt.format(this.dataculto);

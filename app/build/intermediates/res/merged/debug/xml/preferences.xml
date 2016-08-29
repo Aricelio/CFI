@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/geral" >
+
+        <CheckBoxPreference
+            android:title="@string/checkbox_modo"
+            android:defaultValue="false"
+            android:summary="@string/checkbox_modo_summary"
+            android:key="modo" />
+    </PreferenceCategory>
+</PreferenceScreen>
