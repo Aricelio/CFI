@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.com.ti.aricelio.cfi.InsereFrequenciaActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Membros"
+        android:textStyle="bold"
+        android:id="@+id/tvMembros"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        android:text="00"
+        android:paddingStart="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/tvQtdeMembros"
+        android:layout_alignBottom="@+id/btnMenosMembros"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textSize="32sp"
+        android:id="@+id/btnMenosMembros"
+        android:onClick="onClickRetiraMembro"
+        android:layout_below="@+id/tvMembros"
+        android:layout_toLeftOf="@+id/tvQtdeMembros" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="32sp"
+        android:id="@+id/btnMore"
+        android:onClick="onClickAddMembro"
+        android:layout_alignBottom="@+id/btnMenosMembros"
+        android:layout_toRightOf="@+id/tvQtdeMembros" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:textSize="20sp"
+        android:text="Visitantes Frequentes"
+        android:textStyle="bold"
+        android:id="@+id/tvVFrequentes"
+        android:layout_below="@+id/tvQtdeMembros"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        android:text="00"
+        android:paddingStart="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/tvQtdeVFrequentes"
+        android:layout_alignBottom="@+id/btnMenosVFrequentes"
+        android:layout_toRightOf="@+id/btnMenosMembros"
+        android:layout_toEndOf="@+id/btnMenosMembros" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textSize="32sp"
+        android:id="@+id/btnMenosVFrequentes"
+        android:onClick="onClickRetiraVF"
+        android:layout_below="@+id/tvVFrequentes"
+        android:layout_toLeftOf="@+id/tvQtdeVFrequentes" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="32sp"
+        android:id="@+id/btnMaisVFrequentes"
+        android:onClick="onClickAddVF"
+        android:layout_below="@+id/tvVFrequentes"
+        android:layout_toRightOf="@+id/tvQtdeVFrequentes" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:textSize="20sp"
+        android:text="Visitantes Não Frequentes"
+        android:textStyle="bold"
+        android:id="@+id/tvVNFrequentes"
+        android:layout_below="@+id/tvQtdeVFrequentes"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        android:text="00"
+        android:paddingStart="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/tvQtdeVNFrequentes"
+        android:layout_alignBottom="@+id/btnMaisVNFrequentes"
+        android:layout_toLeftOf="@+id/btnMaisVFrequentes"
+        android:layout_toStartOf="@+id/btnMaisVFrequentes" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textSize="32sp"
+        android:id="@+id/btnMenosVNFrequentes"
+        android:onClick="onClickRetiraVNF"
+        android:layout_below="@+id/tvVNFrequentes"
+        android:layout_toLeftOf="@+id/tvQtdeVNFrequentes" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="32sp"
+        android:id="@+id/btnMaisVNFrequentes"
+        android:onClick="onClickAddVNF"
+        android:layout_below="@+id/tvVNFrequentes"
+        android:layout_toRightOf="@+id/tvQtdeVNFrequentes" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text=" "
+        android:textStyle="bold"
+        android:id="@+id/tvTotal"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:layout_below="@+id/tvQtdeVNFrequentes"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:textSize="18sp"
+        android:id="@+id/btnSalvar"
+        android:onClick="onClickSalvar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:id="@+id/chbEBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvTotal"
+        android:text="EBD"
+        android:checked="false" />
+
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Presentation.MainActivity">
+
+    <item
+        android:id="@+id/action_card_main_edit"
+        android:orderInCategory="100"
+        android:title="@string/item_card_edit" />
+
+    <item
+        android:id="@+id/action_card_main_delete"
+        android:orderInCategory="100"
+        android:title="@string/item_card_delete" />
+
+    <item
+        android:id="@+id/action_card_main_share"
+        android:orderInCategory="100"
+        android:title="@string/item_card_share" />
+</menu>

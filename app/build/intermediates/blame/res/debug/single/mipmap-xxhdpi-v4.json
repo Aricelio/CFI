@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_delete.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-xxhdpi/ic_delete.png"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_app.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/exploded-aar/br.com.ti.aricelio/libUtils/0.0.1/res/mipmap-xxhdpi-v4/ic_app.png"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_whatsapp.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-xxhdpi/ic_whatsapp.png"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_church.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-xxhdpi/ic_church.png"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_plus.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-xxhdpi/ic_plus.png"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_dots.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-xxhdpi/ic_dots.png"
+    }
+]

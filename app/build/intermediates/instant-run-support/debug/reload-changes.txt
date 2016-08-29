@@ -1,0 +1,6 @@
+CHANGED,/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/br/com/ti/aricelio/cfi/Adapter/FrequenciaAdapter$override.class
+CHANGED,/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/br/com/ti/aricelio/cfi/Adapter/FrequenciaAdapter$1$override.class
+CHANGED,/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
+CHANGED,/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/br/com/ti/aricelio/cfi/Adapter/FrequenciaAdapter$MyMenuItemClickListener$override.class
+CHANGED,/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/br/com/ti/aricelio/cfi/Adapter/FrequenciaAdapter$MyViewHolder$override.class
+CHANGED,/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/br/com/ti/aricelio/cfi/Adapter/FrequenciaAdapter$2$override.class

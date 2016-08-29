@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Controle de Frequências de Igrejas</string>
+    <string name="action_settings">Configurações</string>
+
+    <!-- Conteudo CardView-->
+    <string name="membros">Membros:</string>
+    <string name="visitantes_frequentes">Visitantes Frequentes:</string>
+    <string name="visitantes_nao_frequentes">Visitantes Não Frequentes:</string>
+    <string name="culto">Culto:</string>
+    <string name="palavra">Palavra:</string>
+    <string name="louvor">Louvor:</string>
+    <string name="direcao">Direção:</string>
+    <string name="ebd">EBD:</string>
+
+    <!-- Item Card Main-->
+    <string name="item_card_edit">Editar</string>
+    <string name="item_card_delete">Apagar</string>
+    <string name="item_card_share">Compartilhar</string>
+
+</resources>

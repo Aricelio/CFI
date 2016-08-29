@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/menu/menu_card_main.xml",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/menu/menu_card_main.xml"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/menu/menu_main.xml"
+    }
+]

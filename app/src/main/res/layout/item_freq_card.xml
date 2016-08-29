@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_card_data"
+            android:text="Culto: 22 Ago 2016"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"/>
+
+        <ImageView
+            android:id="@+id/menu_overflow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_dots" />
+
+        <TextView
+            android:id="@+id/tv_card_qtde_membros"
+            android:text="Membros: 20"
+            android:textColor="@color/grey"
+            android:layout_below="@+id/tv_card_data"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_card_qtde_vf"
+            android:layout_below="@+id/tv_card_qtde_membros"
+            android:text="Visitantes Frequentes: 20"
+            android:textColor="@color/grey"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingLeft="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_card_qtde_vnf"
+            android:layout_below="@+id/tv_card_qtde_vf"
+            android:text="Visitantes Não Frequentes: 20"
+            android:textColor="@color/grey"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_card_louvor"
+            android:layout_below="@+id/tv_card_qtde_vnf"
+            android:text="Louvor: Juliano"
+            android:textColor="@color/grey"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_card_palavra"
+            android:layout_below="@+id/tv_card_louvor"
+            android:text="Palavra: Juliano"
+            android:textColor="@color/grey"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="5dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/item_whatsapp"
+            android:layout_below="@+id/tv_card_palavra"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@+id/item_detele"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_whatsapp" />
+
+        <ImageView
+            android:id="@+id/item_detele"
+            android:layout_below="@+id/tv_card_palavra"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_delete" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
