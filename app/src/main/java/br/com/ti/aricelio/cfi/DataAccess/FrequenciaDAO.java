@@ -4,14 +4,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import android.widget.Switch;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
+import br.com.ti.aricelio.cfi.Enum.EnumFiltro;
 import br.com.ti.aricelio.cfi.Interface.FrequenciaRepository;
-import br.com.ti.aricelio.cfi.Model.EnumTipoCulto;
+import br.com.ti.aricelio.cfi.Enum.EnumTipoCulto;
 import br.com.ti.aricelio.cfi.Model.Frequencia;
 import br.com.ti.aricelio.libutils.DataAccess.BuildSQL;
 
@@ -49,6 +51,23 @@ public class FrequenciaDAO implements FrequenciaRepository {
             values.put(DBUtil.F_TCULTO, f.getTipoCulto().toString());
             values.put(DBUtil.F_OBLOUVOR, f.getOb_louvor());
             values.put(DBUtil.F_OBPALAVRA, f.getOb_palavra());
+
+            // Tipo do Culto
+            Calendar cal= Calendar.getInstance();
+            cal.setTime(f.getDataculto());
+            int dia = cal.get(Calendar.DAY_OF_WEEK);
+
+            switch(dia){
+                case Calendar.MONDAY:
+                    values.put(DBUtil.F_TCULTO, EnumTipoCulto.GLORIFICACAO.toString());
+                    break;
+                case Calendar.TUESDAY:
+                    values.put(DBUtil.F_TCULTO, EnumTipoCulto.TRANSMISSAO.toString());
+                    break;
+                case Calendar.WEDNESDAY:
+                    values.put(DBUtil.F_TCULTO, EnumTipoCulto.SENHORAS.toString());
+                    break;
+            }
 
             // Inserção
             dbUtil = new DBUtil(mContext);
@@ -134,11 +153,94 @@ public class FrequenciaDAO implements FrequenciaRepository {
         }
     }
 
+    // Faz uma busca com base no filtro passado.....................................................
+    public List<Frequencia> findWithFilter(EnumFiltro filtro) throws Exception{
+
+        boolean isFiltroGlorificacao = false;
+        List<Frequencia> list  = new ArrayList<>();
+        //SimpleDateFormat dt = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        String sql="";
+
+        // Define a consulta
+        // Se escolheu o filtro TODAS
+        if(filtro.equals(EnumFiltro.TODAS)){
+            sql = BuildSQL.select(DBUtil.T_FREQUENCIA)
+                  + " ORDER BY " + DBUtil.F_DATA + " DESC ";
+        }
+        // Se escolheu o filtro EBD
+        else if(filtro.equals(EnumFiltro.EBD)){
+            sql = BuildSQL.select(DBUtil.T_FREQUENCIA);
+            sql += " WHERE " + DBUtil.F_TCULTO + " LIKE '" + EnumTipoCulto.EBD + "'"
+                + " ORDER BY " + DBUtil.F_DATA + " DESC ";
+        }
+        // Se escolheu o filtro SENHORAS
+        else if(filtro.equals(EnumFiltro.SENHORAS)){
+            sql = BuildSQL.select(DBUtil.T_FREQUENCIA);
+            sql += " WHERE " + DBUtil.F_TCULTO + " LIKE '" + EnumTipoCulto.SENHORAS + "'"
+                + " ORDER BY " + DBUtil.F_DATA + " DESC ";
+        }
+        // Se escolheu o filtro ULTIMOS 7 DIAS
+        else if(filtro.equals(EnumFiltro.ULTIMOS_7_DIAS)){
+            sql = BuildSQL.select(DBUtil.T_FREQUENCIA);
+            sql += " ORDER BY " + DBUtil.F_DATA + " DESC LIMIT 7";
+        }
+        // Se escolheu o filtro ULTIMO MES
+        else if(filtro.equals(EnumFiltro.ULTIMOS_MES)){
+            sql = BuildSQL.select(DBUtil.T_FREQUENCIA);
+            sql += " ORDER BY " + DBUtil.F_DATA + " DESC LIMIT 30";
+        }
+        // Se escolheu o filtro GLORIFICAÇÃO
+        else if(filtro.equals(EnumFiltro.GLORIFICACAO)){
+            sql = BuildSQL.select(DBUtil.T_FREQUENCIA)
+                    + " ORDER BY " + DBUtil.F_DATA + " DESC ";
+            isFiltroGlorificacao = true;
+        }
+
+        // Realiza a consulta
+        DBUtil dbUtil = new DBUtil(mContext);
+        Cursor cursor = dbUtil.getReadableDatabase().rawQuery(sql, null);
+
+        // Preenche a lista com os dados
+        try{
+            while(cursor.moveToNext()) {
+                list.add(getFrequencia(cursor));
+            }
+
+            if(!isFiltroGlorificacao){
+                return list;
+            }
+            else{
+                return getListFiltradaGlorificacao(list);
+            }
+
+        } catch(Exception e){
+            throw new Exception("Erro ao buscar os dados!!");
+        } finally {
+            cursor.close();
+            dbUtil.close();
+        }
+    }
+
+    // Método que realiza o filtro do tipo Glorificação.............................................
+    private List<Frequencia> getListFiltradaGlorificacao(List<Frequencia> list){
+        List<Frequencia> listaFiltrada = new ArrayList<>();
+
+        for(Frequencia f : list){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(f.getDataculto());
+            int dia = cal.get(Calendar.DAY_OF_WEEK);
+            if(dia == Calendar.MONDAY){
+                listaFiltrada.add(f);
+            }
+        }
+
+        return listaFiltrada;
+    }
+
     // Método Buscar com parametros.................................................................
     public List<Frequencia> find(int rows, boolean isOrderByDesc, String fieldOrderBy, String typeFieldOrderBy) throws Exception {
 
         List<Frequencia> list  = new ArrayList<>();
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         //SimpleDateFormat dt2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
 
         String sql = BuildSQL.select(DBUtil.T_FREQUENCIA,rows,isOrderByDesc,fieldOrderBy, typeFieldOrderBy);
@@ -148,31 +250,8 @@ public class FrequenciaDAO implements FrequenciaRepository {
 
         try{
             while(cursor.moveToNext()) {
-                Frequencia f = new Frequencia();
-
-                f.setId(cursor.getLong(0));
-                f.setQtdeMembros(cursor.getInt(1));
-                f.setQtdeVFreq(cursor.getInt(2));
-                f.setQtdeVNFreq(cursor.getInt(3));
-
-                f.setOb_louvor( cursor.getString(6));
-                f.setOb_palavra( cursor.getString(7));
-
-                // Data
-                f.setDataculto( dt.parse( cursor.getString(4)));
-
-
-                // Tipo Culto
-                if(cursor.getString(5).equals(EnumTipoCulto.NORMAL.toString()))
-                    f.setTipoCulto(EnumTipoCulto.NORMAL);
-                else if(cursor.getString(5).equals(EnumTipoCulto.SENHORAS.toString()))
-                    f.setTipoCulto(EnumTipoCulto.SENHORAS);
-                else if(cursor.getString(5).equals(EnumTipoCulto.EBD.toString()))
-                    f.setTipoCulto(EnumTipoCulto.EBD);
-
-                list.add(f);
+                list.add(getFrequencia(cursor));
             }
-
             return list;
 
         } catch(Exception e){
@@ -181,5 +260,33 @@ public class FrequenciaDAO implements FrequenciaRepository {
             cursor.close();
             dbUtil.close();
         }
+    }
+
+    // Setar os dados na lista
+    private Frequencia getFrequencia(Cursor cursor) throws Exception{
+
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Frequencia f = new Frequencia();
+
+        f.setId(cursor.getLong(0));
+        f.setQtdeMembros(cursor.getInt(1));
+        f.setQtdeVFreq(cursor.getInt(2));
+        f.setQtdeVNFreq(cursor.getInt(3));
+
+        f.setOb_louvor( cursor.getString(6));
+        f.setOb_palavra( cursor.getString(7));
+
+        // Data
+        f.setDataculto( dt.parse( cursor.getString(4)));
+
+        // Tipo Culto
+        if(cursor.getString(5).equals(EnumTipoCulto.NORMAL.toString()))
+            f.setTipoCulto(EnumTipoCulto.NORMAL);
+        else if(cursor.getString(5).equals(EnumTipoCulto.SENHORAS.toString()))
+            f.setTipoCulto(EnumTipoCulto.SENHORAS);
+        else if(cursor.getString(5).equals(EnumTipoCulto.EBD.toString()))
+            f.setTipoCulto(EnumTipoCulto.EBD);
+
+        return f;
     }
 }

@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import br.com.ti.aricelio.cfi.Enum.EnumTipoCulto;
+
 /**
  * Created by aricelio on 23/08/16.
  */
@@ -23,17 +25,9 @@ public class Frequencia {
 
         // Pega a data atual
         Calendar cal = Calendar.getInstance();
-        int diaSemana = cal.get(cal.DAY_OF_WEEK);
 
-        // Seta a Data
+        this.tipoCulto = EnumTipoCulto.NORMAL;
         this.dataculto = cal.getTime();
-
-        if(diaSemana == Calendar.WEDNESDAY)
-            this.tipoCulto = EnumTipoCulto.SENHORAS;
-        else if(diaSemana == Calendar.MONDAY)
-            this.tipoCulto = EnumTipoCulto.GLORIFICACAO;
-        else
-            this.tipoCulto = EnumTipoCulto.NORMAL;
 
     }
     // Getters e Setters............................................................................
@@ -55,6 +49,10 @@ public class Frequencia {
 
     public int getQtdeMembros() {
         return qtdeMembros;
+    }
+
+    public String getStringQtdeMembros() {
+        return String.valueOf(qtdeMembros);
     }
 
     public void setQtdeMembros(int qtdeMembros) {

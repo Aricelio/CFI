@@ -13,18 +13,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import br.com.ti.aricelio.cfi.DataAccess.FrequenciaDAO;
-import br.com.ti.aricelio.cfi.Model.EnumTipoCulto;
+import br.com.ti.aricelio.cfi.Extras.Extras;
+import br.com.ti.aricelio.cfi.Enum.EnumTipoCulto;
 import br.com.ti.aricelio.cfi.Model.Frequencia;
 import br.com.ti.aricelio.cfi.R;
 import br.com.ti.aricelio.libutils.Interfaces.RecyclerViewOnClickListener;
@@ -65,23 +62,45 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        SimpleDateFormat dt = new SimpleDateFormat("dd MMM yyyy");
+        // Membros
+        String membros = mContext.getString(R.string.membros) + " " + mList.get(position).getQtdeMembros();
+        holder.tvQtdeMembros.setText(membros);
 
-        holder.tvQtdeMembros.setText(mContext.getString(R.string.membros) + " "+ mList.get(position).getQtdeMembros());
-        holder.tvQtdeVF.setText(mContext.getString(R.string.visitantes_frequentes) + " "+ mList.get(position).getQtdeVFreq());
-        holder.tvQtdeVNF.setText(mContext.getString(R.string.visitantes_nao_frequentes) + " "+ mList.get(position).getQtdeVNFreq());
+        // Visitantes
+        String visitantesF = mContext.getString(R.string.visitantes_frequentes) + " " + mList.get(position).getQtdeVFreq();
+        String visitantesNF = mContext.getString(R.string.visitantes_nao_frequentes) + " " + mList.get(position).getQtdeVNFreq();
+        holder.tvQtdeVF.setText(visitantesF);
+        holder.tvQtdeVNF.setText(visitantesNF);
+
+        // Data do Culto
+        String tipoCulto = mList.get(position).getTipoCulto().toString();
+        String titulo="";
+        String louvor="";
+        String palavra="";
 
         // Se for EBD
-        if(mList.get(position).getTipoCulto().equals(EnumTipoCulto.EBD)){
-            holder.tvData.setText( mContext.getString(R.string.ebd) + " "+ dt.format(mList.get(position).getDataculto()));
-            holder.tvLouvor.setText(mContext.getString(R.string.direcao) + " "+ mList.get(position).getOb_louvor());
-            holder.tvPalavra.setText("");
+        if(tipoCulto.equals(EnumTipoCulto.EBD.toString())){
+            titulo = mContext.getString(R.string.ebd)+" "+Extras.getFormatDate(mList.get(position).getDataculto());
+            louvor = mContext.getString(R.string.direcao) + " "+ mList.get(position).getOb_louvor();
+            palavra = "";
         }
+        // Senão sefor SENHORAS
+        else if(tipoCulto.equals(EnumTipoCulto.SENHORAS.toString())){
+            titulo = "Culto Senhoras: "+Extras.getFormatDate(mList.get(position).getDataculto());
+            louvor = mContext.getString(R.string.louvor) + " "+ mList.get(position).getOb_louvor();
+            palavra = mContext.getString(R.string.palavra) + " "+ mList.get(position).getOb_palavra();
+        }
+        // Senão se for Culto Normal
         else{
-            holder.tvData.setText( mContext.getString(R.string.culto) + " "+ dt.format(mList.get(position).getDataculto()));
-            holder.tvLouvor.setText(mContext.getString(R.string.louvor) + " "+ mList.get(position).getOb_louvor());
-            holder.tvPalavra.setText(mContext.getString(R.string.palavra) + " "+ mList.get(position).getOb_palavra());
+            titulo = mContext.getString(R.string.culto)+" "+ Extras.getFormatDate(mList.get(position).getDataculto());
+            louvor = mContext.getString(R.string.louvor) + " "+ mList.get(position).getOb_louvor();
+            palavra = mContext.getString(R.string.palavra) + " "+ mList.get(position).getOb_palavra();
         }
+
+        // Seta os valores
+        holder.tvData.setText(titulo);
+        holder.tvLouvor.setText(louvor);
+        holder.tvPalavra.setText(palavra);
 
         // Menu OverFlow
         holder.menuOverflow.setOnClickListener(new View.OnClickListener() {
@@ -104,23 +123,23 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
             @Override
             public void onClick(View view) {
 
-                // Cria o AlertDialog
-                AlertDialog alertDirecao;
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            // Cria o AlertDialog
+            AlertDialog alertDirecao;
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 
-                builder.setTitle("Atenção!");
-                builder.setMessage("Deseja realmente apagar essa frequência?");
-                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        deleteItem(position);
-                    }
-                });
-                builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) { }
-                });
+            builder.setTitle("Atenção!");
+            builder.setMessage("Deseja realmente apagar essa frequência?");
+            builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    deleteItem(position);
+                }
+            });
+            builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) { }
+            });
 
-                alertDirecao = builder.create();
-                alertDirecao.show();
+            alertDirecao = builder.create();
+            alertDirecao.show();
             }
         });
     }
@@ -204,39 +223,115 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
     private String getShareContent(int position, boolean isForWhatsapp){
 
         Frequencia f = mList.get(position);
-        String strContent;
+        String strConteudo;
 
+        // Senão compartilhar com o Whatsapp
         if(!isForWhatsapp){
+
+            // Se for EBD
             if(mList.get(position).getTipoCulto().equals(EnumTipoCulto.EBD)){
-                strContent =
+                strConteudo =
                     mContext.getString(R.string.ebd) + " " + f.getStringDataculto() + "\n"
-                    + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n"
-                    + mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
-                    + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n"
-                    + mContext.getString(R.string.direcao) + " " + f.getOb_louvor();
+                    + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n";
+
+                // Senão houve visitantes
+                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVFreq() == 0){
+                    strConteudo += "Sem visitantes\n";
+                }
+                // Se houve visitantes
+                else{
+                    strConteudo +=
+                        mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
+                        + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n";
+
+                }
+                // Add o obreiro que dirigiu o culto
+                strConteudo += mContext.getString(R.string.direcao) + " " + f.getOb_louvor();
             }
+            // Se for culto Normal
             else{
-                strContent =
+                strConteudo =
                     mContext.getString(R.string.culto) + " " + f.getStringDataculto() + "\n"
-                    + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n"
-                    + mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
-                    + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n"
-                    + mContext.getString(R.string.louvor) + " " + f.getOb_louvor() + "\n"
-                    + mContext.getString(R.string.palavra) + " " + f.getOb_palavra();
+                    + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n";
+
+                // Senão houve visitantes
+                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVFreq() == 0){
+                    strConteudo += "Sem visitantes\n";
+                }
+                // Se houve vistantes
+                else{
+                    strConteudo +=
+                        mContext.getString(R.string.visitantes_frequentes) + " " + f.getQtdeVFreq() + "\n"
+                        + mContext.getString(R.string.visitantes_nao_frequentes) + " " + f.getQtdeVNFreq() + "\n";
+                }
+                // Add o obreiro que dirigiu o louvor e a palavra
+                strConteudo +=
+                        mContext.getString(R.string.direcao) + " " + f.getOb_louvor()
+                        + mContext.getString(R.string.palavra) + " " + f.getOb_palavra();
             }
         }
+        // Se for compartilhar com o Whatsapp
         else{
-            strContent =
-                mContext.getString(R.string.culto_w) + " " + f.getStringDataculto() + "\n"
-                + mContext.getString(R.string.membros_w) + " " + f.getQtdeMembros() + "\n"
-                + mContext.getString(R.string.visitantes_frequentes_w) + " " + f.getQtdeVFreq() + "\n"
-                + mContext.getString(R.string.visitantes_nao_frequentes_w) + " " + f.getQtdeVNFreq() + "\n"
-                + mContext.getString(R.string.louvor_w) + " " + f.getOb_louvor() + "\n"
-                + mContext.getString(R.string.palavra_w) + " " + f.getOb_palavra();
+            // Se for EBD
+            if(mList.get(position).getTipoCulto().equals(EnumTipoCulto.EBD)){
+                strConteudo =
+                    mContext.getString(R.string.ebd_w) + " " + f.getStringDataculto() + "\n"
+                    + mContext.getString(R.string.membros_w) + " " + f.getQtdeMembros() + "\n";
+
+                // Senão houve visitantes
+                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVFreq() == 0){
+                    strConteudo += "*Sem visitantes*\n";
+                }
+                // Se houve visitantes
+                else{
+                    strConteudo +=
+                        mContext.getString(R.string.visitantes_frequentes_w) + " "
+                        + f.getQtdeVFreq() + "\n"
+                        + mContext.getString(R.string.visitantes_nao_frequentes_w) + " "
+                        + f.getQtdeVNFreq() + "\n";
+                }
+
+                // Add o obreiro que dirigiu o culto
+                strConteudo += mContext.getString(R.string.direcao_w)
+                    + " " + f.getOb_louvor() + "\n";
+
+            }
+            // Senão for EBD
+            else{
+                strConteudo =
+                    mContext.getString(R.string.culto_w) + " " + f.getStringDataculto() + "\n"
+                    + mContext.getString(R.string.membros_w) + " " + f.getQtdeMembros() + "\n";
+
+                // Senão houve visitantes
+                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVFreq() == 0){
+                    strConteudo += "*Sem visitantes*\n";
+                }
+                // Se houve visitantes
+                else{
+                    strConteudo +=
+                       mContext.getString(R.string.visitantes_frequentes_w) + " "
+                       + f.getQtdeVFreq() + "\n"
+                       + mContext.getString(R.string.visitantes_nao_frequentes_w) + " "
+                       + f.getQtdeVNFreq() + "\n";
+                }
+
+                // Add o obreiro que dirigiu o louvor e a palavra
+                // Se o mesmo obreiro dirigiu o louvor e a palavra
+                if(f.getOb_louvor().equals(f.getOb_palavra())){
+                    strConteudo +=
+                        mContext.getString(R.string.direcao_w) + " "
+                        + f.getOb_louvor();
+                }
+                // senão
+                else{
+                    strConteudo +=
+                       mContext.getString(R.string.louvor_w) + " " + f.getOb_louvor() + "\n"
+                       + mContext.getString(R.string.palavra_w) + " " + f.getOb_palavra();
+                }
+            }
         }
 
-
-        return strContent;
+        return strConteudo;
     }
 
     // Método que chama direto o Whatsapp...........................................................
@@ -244,17 +339,15 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
         PackageManager pm= mContext.getPackageManager();
         try {
 
-            Intent waIntent = new Intent(Intent.ACTION_SEND);
-            waIntent.setType("text/plain");
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
             String text = getShareContent(position, true);
 
             PackageInfo info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
-            //Check if package exists or not. If not then code
-            //in catch block will be called
-            waIntent.setPackage("com.whatsapp");
+            intent.setPackage("com.whatsapp");
 
-            waIntent.putExtra(Intent.EXTRA_TEXT, text);
-            mContext.startActivity(Intent.createChooser(waIntent, "Compartilhar com"));
+            intent.putExtra(Intent.EXTRA_TEXT, text);
+            mContext.startActivity(Intent.createChooser(intent, "Compartilhar com"));
         } catch(Exception e){
             Toast.makeText(mContext,"Não foi possivel abrir o Whatsapp!",Toast.LENGTH_LONG).show();
         }

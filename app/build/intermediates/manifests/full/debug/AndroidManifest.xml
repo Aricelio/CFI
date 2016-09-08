@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="br.com.ti.aricelio.cfi.MainActivity"
+            android:name="br.com.ti.aricelio.cfi.Presentation.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -24,9 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="br.com.ti.aricelio.cfi.InsereFrequenciaActivity" />
+        <activity android:name="br.com.ti.aricelio.cfi.Presentation.InsereFrequenciaActivity" />
         <activity
-            android:name="br.com.ti.aricelio.cfi.SettingActivity"
+            android:name="br.com.ti.aricelio.cfi.Presentation.SettingActivity"
             android:label="@string/action_settings" >
         </activity>
         <activity

@@ -289,10 +289,13 @@
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="about">Sobre</string>
+    <string name="action_filtro">Filtrar</string>
+    <string name="action_grafico">Gráficos</string>
     <string name="action_settings">Configurações</string>
     <string name="app_name">Controle de Frequências de Igrejas</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
+    <string name="button_salvar">Salvar</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="checkbox_modo">Modo Avançado</string>
     <string name="checkbox_modo_summary">Modo que mostra opções avançadas</string>
@@ -301,6 +304,13 @@
     <string name="direcao">Direção:</string>
     <string name="direcao_w">*Direção:*</string>
     <string name="ebd">EBD:</string>
+    <string name="ebd_w">*EBD:*</string>
+    <string name="filtro_ebd">Escola Biblica Dominical</string>
+    <string name="filtro_glorificacao">Glorificação</string>
+    <string name="filtro_senhoras">Senhoras</string>
+    <string name="filtro_todas">Todos</string>
+    <string name="filtro_ultimos_7_dias">Últimos 7 Dias</string>
+    <string name="filtro_ultimos_mes">Último Mês</string>
     <string name="geral">Geral</string>
     <string name="item_card_delete">Apagar</string>
     <string name="item_card_edit">Editar</string>

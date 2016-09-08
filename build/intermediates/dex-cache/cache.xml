@@ -47,14 +47,14 @@
         jar="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         revision="24.0.0 rc3"
-        sha1="3939ca0e68b86f284064bec78cf03f51d110f334">
+        sha1="7de84342684b3d58bc769819d9f71246aa2320f6">
         <dex dex="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/pre-dexed/debug/instant-run_9ad0f8184c1e2c04e5f78a4df88fcdc9c6e7f98a.jar" />
     </item>
     <item
         jar="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="24.0.0 rc3"
-        sha1="facdec25cd3db1ac139e40b209f3f367ca3c16c5">
+        sha1="1e5ed88ffc0275dd3eed372f3a070112b6c66712">
         <dex dex="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_ed25889f0a7ff6728ec8329ae0afb47e88656150.jar" />
     </item>
     <item

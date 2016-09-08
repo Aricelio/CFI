@@ -18,6 +18,7 @@
     <string name="visitantes_frequentes_w">*Visitantes Frequentes:*</string>
     <string name="visitantes_nao_frequentes_w">*Visitantes Não Frequentes:*</string>
     <string name="culto_w">*Culto:*</string>
+    <string name="ebd_w">*EBD:*</string>
     <string name="palavra_w">*Palavra:*</string>
     <string name="louvor_w">*Louvor:*</string>
     <string name="direcao_w">*Direção:*</string>
@@ -34,6 +35,15 @@
     <string name="geral">Geral</string>
     <string name="sobre_conteudo">Aplicativo para controle de frequência das Igrejas, foi construido de auxiliar os irmãos na contagem da frequência dos membros e visitantes da igreja nos cultos</string>
     <string name="sobre_desenvolvedor">Desenvolvido por: Aricélio de Souza Fernandes</string>
+    <string name="action_filtro">Filtrar</string>
+    <string name="filtro_todas">Todos</string>
+    <string name="filtro_ultimos_7_dias">Últimos 7 Dias</string>
+    <string name="filtro_ebd">Escola Biblica Dominical</string>
+    <string name="filtro_senhoras">Senhoras</string>
+    <string name="filtro_glorificacao">Glorificação</string>
+    <string name="filtro_ultimos_mes">Último Mês</string>
+    <string name="action_grafico">Gráficos</string>
+    <string name="button_salvar">Salvar</string>
 
 
 </resources>
