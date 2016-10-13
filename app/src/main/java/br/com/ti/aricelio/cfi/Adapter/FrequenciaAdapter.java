@@ -90,6 +90,11 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
             louvor = mContext.getString(R.string.louvor) + " "+ mList.get(position).getOb_louvor();
             palavra = mContext.getString(R.string.palavra) + " "+ mList.get(position).getOb_palavra();
         }
+        else if(tipoCulto.equals(EnumTipoCulto.MADRUGADA.toString())){
+            titulo = "Madrugada: "+Extras.getFormatDate(mList.get(position).getDataculto());
+            louvor = mContext.getString(R.string.direcao) + " "+ mList.get(position).getOb_louvor();
+            palavra = "";
+        }
         // Senão se for Culto Normal
         else{
             titulo = mContext.getString(R.string.culto)+" "+ Extras.getFormatDate(mList.get(position).getDataculto());
@@ -224,8 +229,10 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
 
         Frequencia f = mList.get(position);
         String strConteudo;
+        int vf = 0;
+        int vnf = 0;
 
-        // Senão compartilhar com o Whatsapp
+        // SENÃO compartilhar com o Whatsapp
         if(!isForWhatsapp){
 
             // Se for EBD
@@ -255,7 +262,7 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
                     + mContext.getString(R.string.membros) + " " + f.getQtdeMembros() + "\n";
 
                 // Senão houve visitantes
-                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVFreq() == 0){
+                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVNFreq() == 0){
                     strConteudo += "Sem visitantes\n";
                 }
                 // Se houve vistantes
@@ -272,14 +279,26 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
         }
         // Se for compartilhar com o Whatsapp
         else{
-            // Se for EBD
-            if(mList.get(position).getTipoCulto().equals(EnumTipoCulto.EBD)){
-                strConteudo =
-                    mContext.getString(R.string.ebd_w) + " " + f.getStringDataculto() + "\n"
-                    + mContext.getString(R.string.membros_w) + " " + f.getQtdeMembros() + "\n";
+            // Se for EBD ou MADRUGADA
+            String culto = mList.get(position).getTipoCulto().toString();
 
+            if(culto.equals(EnumTipoCulto.EBD) || culto.equals(EnumTipoCulto.MADRUGADA)){
+
+                // Add o titulo
+                strConteudo = "";
+                if(culto.equals(EnumTipoCulto.EBD)){
+                    strConteudo += mContext.getString(R.string.ebd_w) + " " + f.getStringDataculto() + "\n";
+                }
+                else if(culto.equals(EnumTipoCulto.MADRUGADA)){
+                    strConteudo += mContext.getString(R.string.madrugada_w) + " " + f.getStringDataculto() + "\n";
+                }
+
+                // Add a qtde de membros
+                strConteudo += mContext.getString(R.string.membros_w) + " " + f.getQtdeMembros() + "\n";
+
+                // Add a qtde de visitantes
                 // Senão houve visitantes
-                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVFreq() == 0){
+                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVNFreq() == 0){
                     strConteudo += "*Sem visitantes*\n";
                 }
                 // Se houve visitantes
@@ -303,7 +322,10 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
                     + mContext.getString(R.string.membros_w) + " " + f.getQtdeMembros() + "\n";
 
                 // Senão houve visitantes
-                if(f.getQtdeVFreq() == 0 &&  f.getQtdeVFreq() == 0){
+                vf = f.getQtdeVFreq();
+                vnf = f.getQtdeVNFreq();
+
+                if(vf == 0  && vnf == 0){
                     strConteudo += "*Sem visitantes*\n";
                 }
                 // Se houve visitantes

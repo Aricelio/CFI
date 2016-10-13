@@ -8,5 +8,6 @@ public enum EnumTipoCulto{
     SENHORAS,
     EBD,
     GLORIFICACAO,
-    TRANSMISSAO
+    TRANSMISSAO,
+    MADRUGADA
 }

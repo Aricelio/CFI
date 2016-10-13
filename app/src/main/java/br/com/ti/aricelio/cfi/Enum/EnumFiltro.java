@@ -9,5 +9,6 @@ public enum EnumFiltro {
     ULTIMOS_MES,
     EBD,
     SENHORAS,
-    GLORIFICACAO
+    GLORIFICACAO,
+    MADRUGADA
 }

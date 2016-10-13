@@ -76,5 +76,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:text="@string/filtro_glorificacao"/>
+        <RadioButton
+            android:id="@+id/radio_filtro_madrugada"
+            android:textStyle="bold"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="@string/filtro_madrugada"/>
     </RadioGroup>
 </LinearLayout>

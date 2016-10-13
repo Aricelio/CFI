@@ -1,32 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="16"
-    density="hdpi"
+    abi="x86"
+    api-level="21"
+    density="xhdpi"
     format="7"
-    timestamp="98812391118952" >
+    timestamp="146690827033926"
+    verifier="R_CLASS_CHANGE" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="466" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="208" />
     <task
         name="verifier"
-        duration="0" />
+        duration="22" />
 
     <artifact
-        location="/home/aricelio/AndroidStudioProjects/CFI/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/resources-debug.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
+        type="DEX" />
 
-    <build timestamp="98812391118952" >
+    <build timestamp="144143574889112" >
         <artifact
             location="/home/aricelio/AndroidStudioProjects/CFI/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
+    </build>
+    <build timestamp="145614290351334" >
+        <artifact
+            location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="146690827033926"
+        verifier="R_CLASS_CHANGE" >
+        <artifact
+            location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/resources-debug.ap_"
+            type="RESOURCES" />
+        <artifact
+            location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>

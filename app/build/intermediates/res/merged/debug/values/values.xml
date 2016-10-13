@@ -22,6 +22,7 @@
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="blue">#2196F3</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -297,16 +298,21 @@
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="button_salvar">Salvar</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
+    <string name="checkbox_madrugada">Madrugada</string>
+    <string name="checkbox_madrugada_summary">Madrugada somente no Sábado</string>
     <string name="checkbox_modo">Modo Avançado</string>
-    <string name="checkbox_modo_summary">Modo que mostra opções avançadas</string>
+    <string name="checkbox_modo_summary">Mostra opções avançadas</string>
+    <string name="contato">Contato:</string>
     <string name="culto">Culto:</string>
     <string name="culto_w">*Culto:*</string>
     <string name="direcao">Direção:</string>
     <string name="direcao_w">*Direção:*</string>
     <string name="ebd">EBD:</string>
     <string name="ebd_w">*EBD:*</string>
+    <string name="email">ariceliodesouza@gmail.com</string>
     <string name="filtro_ebd">Escola Biblica Dominical</string>
     <string name="filtro_glorificacao">Glorificação</string>
+    <string name="filtro_madrugada">Madrugada</string>
     <string name="filtro_senhoras">Senhoras</string>
     <string name="filtro_todas">Todos</string>
     <string name="filtro_ultimos_7_dias">Últimos 7 Dias</string>
@@ -317,12 +323,14 @@
     <string name="item_card_share">Compartilhar</string>
     <string name="louvor">Louvor:</string>
     <string name="louvor_w">*Louvor:*</string>
+    <string name="madrugada_w">*Madrugada:*</string>
     <string name="membros">Membros:</string>
     <string name="membros_w">*Membros:*</string>
+    <string name="nome">Aricélio S. Fernandes</string>
     <string name="palavra">Palavra:</string>
     <string name="palavra_w">*Palavra:*</string>
-    <string name="sobre_conteudo">Aplicativo para controle de frequência das Igrejas, foi construido de auxiliar os irmãos na contagem da frequência dos membros e visitantes da igreja nos cultos</string>
-    <string name="sobre_desenvolvedor">Desenvolvido por: Aricélio de Souza Fernandes</string>
+    <string name="sobre_conteudo">Aplicativo para controle de frequência dos membros nos cultos das Igrejas.\nDesenvolvido com o objetivo de auxiliar os irmãos na contagem da frequência dos membros e visitantes da igreja nos cultos</string>
+    <string name="sobre_desenvolvedor">Desenvolvedor:</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="title_activity_settings">Configurações</string>
     <string name="visitantes_frequentes">Visitantes Frequentes:</string>

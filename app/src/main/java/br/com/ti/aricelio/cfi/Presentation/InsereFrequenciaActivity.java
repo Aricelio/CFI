@@ -27,9 +27,13 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
     // Variaveis
     private String obL = "", obP = "", tmpData = "";
     boolean closeActivity = false;
-    boolean checkEBD = false;
-    boolean checkTransmissao = false;
+    boolean isEBD = false;
+    boolean isTransmissao = false;
+    boolean isGlorificacao = false;
+    boolean isSenhoras = false;
+    boolean isMadrugada = false;
     boolean isAdvancedMode = false;
+    boolean isModeMadrugadaSab = false;
 
     // Método OnCreate..............................................................................
     @Override
@@ -42,34 +46,56 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(false);
 
-        // CheckBox
-        CheckBox chbEBD = (CheckBox) findViewById(R.id.chbEBD);
+        // Preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean modo = sharedPref.getBoolean("modo",false);
+        Boolean madrugadaSab = sharedPref.getBoolean("madrugada",false);
+        isAdvancedMode = modo;
+        isModeMadrugadaSab = madrugadaSab;
+
+        // CheckBoxs
+        CheckBox chbTipoCulto = (CheckBox) findViewById(R.id.chbTipoCulto);
+        CheckBox chbMad = (CheckBox) findViewById(R.id.chbMadrugada);
         Calendar cal = Calendar.getInstance();
 
         int dia = cal.get(Calendar.DAY_OF_WEEK);
 
-        // Se for domingo ou terça
+        // CheckBox Madrugada........................................*/
+        // Se marcou quen tem madrugada todos os dias
+        if(!isModeMadrugadaSab && dia != Calendar.SUNDAY){
+            // Coloca o Checkbox visivel
+            chbMad.setVisibility(CheckBox.VISIBLE);
+        }
+        // Senão, se marcou que tem madrugada só no Sab
+        else{
+            if(dia == Calendar.SATURDAY){
+                // Coloca o Checkbox visivel
+                chbMad.setVisibility(CheckBox.VISIBLE);
+            }
+            else{
+                // Coloca o Checkbox invisivel
+                chbMad.setVisibility(CheckBox.INVISIBLE);
+            }
+        }
+
+        // CheckBox Tipo Culto......................................*/
+        // Se for Domingo ou Terça
         if(dia == Calendar.SUNDAY || dia == Calendar.TUESDAY){
 
             // Coloca o Checkbox visivel
-            chbEBD.setVisibility(CheckBox.VISIBLE);
+            chbTipoCulto.setVisibility(CheckBox.VISIBLE);
 
-            // Altera o nome dependendo do dia
+            // Altera o nome dependendo do CheckBox
             if(dia == Calendar.SUNDAY){
-                chbEBD.setText("EBD");
+                chbTipoCulto.setText("EBD");
             }
             else{
-                chbEBD.setText("Transmissão Via Satelite");
+                chbTipoCulto.setText("Transmissão Via Satelite");
             }
         }
         else{
-            chbEBD.setVisibility(CheckBox.INVISIBLE);
+            chbTipoCulto.setVisibility(CheckBox.INVISIBLE);
         }
-
-        // Preferences
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        Boolean modo = sharedPref.getBoolean("modo",false);
-        isAdvancedMode = modo;
     }
 
     // Método Salvar...............................................................................
@@ -195,17 +221,31 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
 
         // Verifica o ChechBox
         Calendar cal = Calendar.getInstance();
-        int diaSemana = cal.get(Calendar.DAY_OF_WEEK);
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        CheckBox chbMad = (CheckBox) findViewById(R.id.chbMadrugada);
+        CheckBox chbTipoCulto = (CheckBox) findViewById(R.id.chbTipoCulto);
 
-        // Se for Domingo ou Terça verifica se o CheckBox foi selecionado
-        if(diaSemana == Calendar.SUNDAY || diaSemana == Calendar.TUESDAY){
-            CheckBox chbEBD = (CheckBox) findViewById(R.id.chbEBD);
+        // Senão é Domingo e o CheckBox da Madrugada foi selecionado
+        if(day != Calendar.SUNDAY && chbMad.isChecked()){
+            isMadrugada = true;
+        }
+        else{
 
-            if(diaSemana == Calendar.SUNDAY && chbEBD.isChecked()){
-                checkEBD = true;
+            // Se for Domingo e o checkbox estiver selecionado, quer dizer que é EBD
+            if(day == Calendar.SUNDAY && chbTipoCulto.isChecked()){
+                isEBD = true;
             }
-            else if(diaSemana == Calendar.TUESDAY &&  chbEBD.isChecked()){
-                checkTransmissao = true;
+            // Se for Segunda é GLORIFICAÇÃO
+            else if(day == Calendar.MONDAY ){
+                isGlorificacao = true;
+            }
+            // Se for Terça e o checkbox estiver selecioando é TRANSMISSÃO
+            else if(day == Calendar.TUESDAY && chbTipoCulto.isChecked()){
+                isTransmissao = true;
+            }
+            // Se for Quarta é SENHORAS
+            else if(day == Calendar.WEDNESDAY){
+                isSenhoras = true;
             }
         }
 
@@ -228,8 +268,8 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
         final EditText edtOP = (EditText) dialogView.findViewById(R.id.edtObPalavra);
         final EditText edtData = (EditText) dialogView.findViewById(R.id.edtData);
 
-        // Se o CheckBox EBD foi selecionado
-        if(checkEBD){
+        // Se o CheckBox EBD ou Madrugada foram selecionados
+        if(isEBD || isMadrugada){
             edtOP.setVisibility(EditText.INVISIBLE);
             edtOL.setHint("Direção");
         }
@@ -238,26 +278,26 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                // Senão for EBD
-                if(!checkEBD){
-                    obL = edtOL.getText().toString();
-                    obP = edtOP.getText().toString();
+            // Senão for EBD nem Madrugada
+            if(!isEBD && !isMadrugada){
+                obL = edtOL.getText().toString();
+                obP = edtOP.getText().toString();
 
-                    // Se estiver no modo avançado pega a Data inserida
-                    if(isAdvancedMode){
-                        tmpData = edtData.getText().toString();
-                    }
+                // Se estiver no modo avançado pega a Data inserida
+                if(isAdvancedMode){
+                    tmpData = edtData.getText().toString();
                 }
-                // Se for EBD pega só o EDT da direção do culto
-                else{
-                    obL = edtOL.getText().toString();
-                    if(isAdvancedMode){
-                        tmpData = edtData.getText().toString();
-                    }
+            }
+            // Se for EBD ou Madrugada pega só o EDT da direção do culto
+            else{
+                obL = edtOL.getText().toString();
+                if(isAdvancedMode){
+                    tmpData = edtData.getText().toString();
                 }
+            }
 
-                // Chama o método para Salvar
-                salvar();
+            // Chama o método para Salvar
+            salvar();
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -308,18 +348,26 @@ public class InsereFrequenciaActivity extends AppCompatActivity {
             TextView tvQtdeMembros = (TextView) findViewById(R.id.tvQtdeMembros);
             TextView tvQtdeVFrequentes = (TextView) findViewById(R.id.tvQtdeVFrequentes);
             TextView tvQtdeVNFrequentes = (TextView) findViewById(R.id.tvQtdeVNFrequentes);
-            CheckBox chbEBD = (CheckBox) findViewById(R.id.chbEBD);
 
             int qtdeMembros = Integer.parseInt(tvQtdeMembros.getText().toString());
             int qtdeVFreq = Integer.parseInt(tvQtdeVFrequentes.getText().toString());
             int qtdeVNFreq = Integer.parseInt(tvQtdeVNFrequentes.getText().toString());
 
-            // Se o CheckBox foi selecionado
-            if (chbEBD.isChecked() && checkEBD) {
+            // Define o tipo de culto
+            if(isEBD){
                 f.setTipoCulto(EnumTipoCulto.EBD);
             }
-            else if(chbEBD.isChecked() && checkTransmissao){
+            else if(isTransmissao){
                 f.setTipoCulto(EnumTipoCulto.TRANSMISSAO);
+            }
+            else if(isGlorificacao){
+                f.setTipoCulto(EnumTipoCulto.GLORIFICACAO);
+            }
+            else if(isSenhoras){
+                f.setTipoCulto(EnumTipoCulto.SENHORAS);
+            }
+            else if(isMadrugada){
+                f.setTipoCulto(EnumTipoCulto.MADRUGADA);
             }
 
             // Se foi digitado algo no campo Data

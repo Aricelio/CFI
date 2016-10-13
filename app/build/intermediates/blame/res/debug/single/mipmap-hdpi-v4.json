@@ -20,11 +20,11 @@
         "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-hdpi/ic_whatsapp.png"
     },
     {
-        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_church.png",
-        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-hdpi/ic_church.png"
-    },
-    {
         "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_launcher.png",
         "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/aricelio/AndroidStudioProjects/CFI/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_church.png",
+        "source": "/home/aricelio/AndroidStudioProjects/CFI/app/src/main/res/mipmap-hdpi/ic_church.png"
     }
 ]

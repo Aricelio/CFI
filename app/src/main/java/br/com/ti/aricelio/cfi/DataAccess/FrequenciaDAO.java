@@ -52,23 +52,6 @@ public class FrequenciaDAO implements FrequenciaRepository {
             values.put(DBUtil.F_OBLOUVOR, f.getOb_louvor());
             values.put(DBUtil.F_OBPALAVRA, f.getOb_palavra());
 
-            // Tipo do Culto
-            Calendar cal= Calendar.getInstance();
-            cal.setTime(f.getDataculto());
-            int dia = cal.get(Calendar.DAY_OF_WEEK);
-
-            switch(dia){
-                case Calendar.MONDAY:
-                    values.put(DBUtil.F_TCULTO, EnumTipoCulto.GLORIFICACAO.toString());
-                    break;
-                case Calendar.TUESDAY:
-                    values.put(DBUtil.F_TCULTO, EnumTipoCulto.TRANSMISSAO.toString());
-                    break;
-                case Calendar.WEDNESDAY:
-                    values.put(DBUtil.F_TCULTO, EnumTipoCulto.SENHORAS.toString());
-                    break;
-            }
-
             // Inserção
             dbUtil = new DBUtil(mContext);
             dbUtil.getWritableDatabase().insert(DBUtil.T_FREQUENCIA, null, values);
@@ -195,6 +178,11 @@ public class FrequenciaDAO implements FrequenciaRepository {
                     + " ORDER BY " + DBUtil.F_DATA + " DESC ";
             isFiltroGlorificacao = true;
         }
+        else if(filtro.equals(EnumFiltro.MADRUGADA)){
+            sql = BuildSQL.select(DBUtil.T_FREQUENCIA);
+            sql += " WHERE " + DBUtil.F_TCULTO + " LIKE '" + EnumTipoCulto.MADRUGADA + "'"
+                    + " ORDER BY " + DBUtil.F_DATA + " DESC ";
+        }
 
         // Realiza a consulta
         DBUtil dbUtil = new DBUtil(mContext);
@@ -286,6 +274,8 @@ public class FrequenciaDAO implements FrequenciaRepository {
             f.setTipoCulto(EnumTipoCulto.SENHORAS);
         else if(cursor.getString(5).equals(EnumTipoCulto.EBD.toString()))
             f.setTipoCulto(EnumTipoCulto.EBD);
+        else if(cursor.getString(5).equals(EnumTipoCulto.MADRUGADA.toString()))
+            f.setTipoCulto(EnumTipoCulto.MADRUGADA);
 
         return f;
     }

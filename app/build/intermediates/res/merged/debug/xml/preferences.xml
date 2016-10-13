@@ -10,5 +10,11 @@
             android:defaultValue="false"
             android:summary="@string/checkbox_modo_summary"
             android:key="modo" />
+
+        <CheckBoxPreference
+            android:title="@string/checkbox_madrugada"
+            android:defaultValue="false"
+            android:summary="@string/checkbox_madrugada_summary"
+            android:key="madrugada" />
     </PreferenceCategory>
 </PreferenceScreen>

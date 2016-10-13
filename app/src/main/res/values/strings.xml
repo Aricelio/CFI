@@ -19,6 +19,7 @@
     <string name="visitantes_nao_frequentes_w">*Visitantes Não Frequentes:*</string>
     <string name="culto_w">*Culto:*</string>
     <string name="ebd_w">*EBD:*</string>
+    <string name="madrugada_w">*Madrugada:*</string>
     <string name="palavra_w">*Palavra:*</string>
     <string name="louvor_w">*Louvor:*</string>
     <string name="direcao_w">*Direção:*</string>
@@ -31,10 +32,10 @@
 
     <!-- Activity Configurações -->
     <string name="checkbox_modo">Modo Avançado</string>
-    <string name="checkbox_modo_summary">Modo que mostra opções avançadas</string>
+    <string name="checkbox_modo_summary">Mostra opções avançadas</string>
     <string name="geral">Geral</string>
-    <string name="sobre_conteudo">Aplicativo para controle de frequência das Igrejas, foi construido de auxiliar os irmãos na contagem da frequência dos membros e visitantes da igreja nos cultos</string>
-    <string name="sobre_desenvolvedor">Desenvolvido por: Aricélio de Souza Fernandes</string>
+    <string name="sobre_conteudo">Aplicativo para controle de frequência dos membros nos cultos das Igrejas.\nDesenvolvido com o objetivo de auxiliar os irmãos na contagem da frequência dos membros e visitantes da igreja nos cultos</string>
+    <string name="sobre_desenvolvedor">Desenvolvedor:</string>
     <string name="action_filtro">Filtrar</string>
     <string name="filtro_todas">Todos</string>
     <string name="filtro_ultimos_7_dias">Últimos 7 Dias</string>
@@ -44,6 +45,12 @@
     <string name="filtro_ultimos_mes">Último Mês</string>
     <string name="action_grafico">Gráficos</string>
     <string name="button_salvar">Salvar</string>
+    <string name="checkbox_madrugada">Madrugada</string>
+    <string name="checkbox_madrugada_summary">Madrugada somente no Sábado</string>
+    <string name="filtro_madrugada">Madrugada</string>
+    <string name="contato">Contato:</string>
+    <string name="email">ariceliodesouza@gmail.com</string>
+    <string name="nome">Aricélio S. Fernandes</string>
 
 
 </resources>

@@ -49,6 +49,47 @@
         android:textColor="@color/grey"
         android:textSize="16sp"
         android:text="@string/sobre_desenvolvedor"
+        android:textStyle="bold"
         android:id="@+id/tvDesenvolvedor"   />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvConteudo"
+        android:layout_toRightOf="@+id/tvDesenvolvedor"
+        android:layout_toEndOf="@+id/tvDesenvolvedor"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        android:text="@string/nome"
+        android:id="@+id/tvNome"   />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDesenvolvedor"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        android:text="@string/contato"
+        android:textStyle="bold"
+        android:id="@+id/tvContato"   />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDesenvolvedor"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/tvContato"
+        android:layout_toEndOf="@+id/tvContato"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        android:text="@string/email"
+        android:id="@+id/tvEmail"   />
 
 </RelativeLayout>

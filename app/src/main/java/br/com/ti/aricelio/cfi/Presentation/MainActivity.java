@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     private List<Frequencia> mList;
     private FrequenciaAdapter mAdapter;
 
-
     // Método onCreate..............................................................................
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +199,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
                                 break;
                             case R.id.radio_filtro_glorificacao:
                                 tmpEnum = EnumFiltro.GLORIFICACAO;
+                                break;
+                            case R.id.radio_filtro_madrugada:
+                                tmpEnum = EnumFiltro.MADRUGADA;
                                 break;
                         }
 
