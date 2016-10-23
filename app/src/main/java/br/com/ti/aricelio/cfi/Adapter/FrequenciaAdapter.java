@@ -281,15 +281,17 @@ public class FrequenciaAdapter extends RecyclerView.Adapter<FrequenciaAdapter.My
         else{
             // Se for EBD ou MADRUGADA
             String culto = mList.get(position).getTipoCulto().toString();
+            String strEBD = EnumTipoCulto.EBD.toString();
+            String strMadrugada = EnumTipoCulto.MADRUGADA.toString();
 
-            if(culto.equals(EnumTipoCulto.EBD) || culto.equals(EnumTipoCulto.MADRUGADA)){
+            if(culto.equals(strEBD) || culto.equals(strMadrugada)){
 
                 // Add o titulo
                 strConteudo = "";
-                if(culto.equals(EnumTipoCulto.EBD)){
+                if(culto.equals(strEBD)){
                     strConteudo += mContext.getString(R.string.ebd_w) + " " + f.getStringDataculto() + "\n";
                 }
-                else if(culto.equals(EnumTipoCulto.MADRUGADA)){
+                else if(culto.equals(strMadrugada)){
                     strConteudo += mContext.getString(R.string.madrugada_w) + " " + f.getStringDataculto() + "\n";
                 }
 
